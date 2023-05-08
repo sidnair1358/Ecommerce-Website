@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -42,13 +43,17 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:flex lg:gap-x-20">
             {navigation.map((item) => (
-              <a
+              <div
                 key={item.name}
-                href={item.href}
                 className="text-xl font-bold leading-6 text-gray-600"
               >
-                {item.name}
-              </a>
+                <Link
+                  key={item.name}
+                  href={`/products/${item.name.toLowerCase()}`}
+                >
+                  {item.name}
+                </Link>
+              </div>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">

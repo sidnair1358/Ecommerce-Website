@@ -16,8 +16,8 @@ export default function ProductCategories({ productCategories }) {
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-4 lg:gap-x-6 lg:space-y-0">
             {categories.map(({ id, image, title }) => (
-              <Link key={id} href={`/products/${title.toLowerCase()}`}>
-                <div key={id} className="group relative mb-6">
+              <Link key={id} href={`/products${id.slice(-13)}`}>
+                <div className="group relative mb-6">
                   <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
                     <img
                       src={image}

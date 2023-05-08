@@ -6,8 +6,13 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      sans: ["Exo 2", "Arial", "sans-serif"],
+    extend: {
+      fontFamily: {
+        sans: ["Exo 2", "Arial", "sans-serif"],
+      },
+      gridTemplateRows: {
+        "[auto,auto,1fr]": "auto auto 1fr",
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],
