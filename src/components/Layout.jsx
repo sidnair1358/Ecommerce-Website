@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {
   return (
-    <div className="absolute">
+    <div className="absolute w-full">
       <Navbar />
       {children}
       <Footer />

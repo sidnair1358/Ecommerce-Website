@@ -1,69 +1,78 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
-
-const product = {
-  name: "Basic Tee 6-Pack",
-  price: "$192",
-  href: "#",
-  breadcrumbs: [
-    { id: 1, name: "Men", href: "#" },
-    { id: 2, name: "Clothing", href: "#" },
-  ],
-  images: [
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-      alt: "Two each of gray, white, and black shirts laying flat.",
-    },
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-      alt: "Model wearing plain black basic tee.",
-    },
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
-      alt: "Model wearing plain gray basic tee.",
-    },
-    {
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-      alt: "Model wearing plain white basic tee.",
-    },
-  ],
-  colors: [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ],
-  sizes: [
-    { name: "XXS", inStock: false },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: true },
-    { name: "2XL", inStock: true },
-    { name: "3XL", inStock: true },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  highlights: [
-    "Hand cut and sewn locally",
-    "Dyed with our proprietary colors",
-    "Pre-washed & pre-shrunk",
-    "Ultra-soft 100% cotton",
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-};
-const reviews = { href: "#", average: 4, totalCount: 117 };
+import { shopContext } from "@/utils";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetails() {
+export default function ProductDetails({ data: products }) {
+  const { addToCart, cartItems } = shopContext();
+  const price = `£${products.variants.edges[0].node.price.amount}0`;
+  const itemImage = products.images.edges[0].node.url;
+  const title = products.title;
+
+  console.log("=== cartItems [id].jsx [16] ===", cartItems);
+
+  const product = {
+    id: products.id,
+    name: title,
+    price: price,
+    href: "#",
+    breadcrumbs: [
+      { id: 1, name: "Men", href: "#" },
+      { id: 2, name: "Clothing", href: "#" },
+    ],
+    images: products.images.edges.map((image) => ({
+      src: image.node.url,
+      alt: "Model wearing plain green basic tee.",
+    })),
+    colors: [
+      {
+        name: "Green",
+        class: "bg-emerald-800",
+        selectedClass: "ring-gray-400",
+      },
+      {
+        name: "Olive",
+        class: "bg-lime-900",
+        selectedClass: "ring-gray-400",
+      },
+      { name: "Ocean", class: "bg-teal-800", selectedClass: "ring-gray-900" },
+      {
+        name: "Purple",
+        class: "bg-purple-950",
+        selectedClass: "ring-gray-900",
+      },
+      { name: "Red", class: "bg-rose-950", selectedClass: "ring-gray-900" },
+    ],
+    sizes: [
+      { name: "XXS", inStock: false },
+      { name: "XS", inStock: true },
+      { name: "S", inStock: true },
+      { name: "M", inStock: true },
+      { name: "L", inStock: true },
+      { name: "XL", inStock: true },
+      { name: "2XL", inStock: true },
+      { name: "3XL", inStock: true },
+    ],
+    description: products.description,
+    highlights: [
+      "Hand cut and sewn locally",
+      "Dyed with our proprietary colors",
+      "Pre-washed & pre-shrunk",
+      "Ultra-soft 100% cotton",
+    ],
+  };
+  const reviews = { href: "#", average: 4, totalCount: 117 };
+
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
+  const handleClick = (product) => {
+    addToCart(product);
+  };
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -75,12 +84,13 @@ export default function ProductDetails() {
             {product.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
-                  <a
-                    href={breadcrumb.href}
+                  <p
+                    style={{ cursor: "pointer" }}
+                    onClick={() => window.history.back()}
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
                     {breadcrumb.name}
-                  </a>
+                  </p>
                   <svg
                     width={16}
                     height={20}
@@ -106,7 +116,6 @@ export default function ProductDetails() {
           </ol>
         </nav>
 
-        {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
@@ -186,7 +195,7 @@ export default function ProductDetails() {
             <form className="mt-10">
               {/* Colors */}
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Color</h3>
+                <h3 className="text-sm font-medium text-gray-900">Colour</h3>
 
                 <RadioGroup
                   value={selectedColor}
@@ -308,10 +317,11 @@ export default function ProductDetails() {
               </div>
 
               <button
-                type="submit"
+                onClick={() => handleClick(product)}
+                type="button"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Add to bag
+                Add to cart
               </button>
             </form>
           </div>
@@ -339,17 +349,18 @@ export default function ProductDetails() {
                 </ul>
               </div>
             </div>
-
-            <div className="mt-10">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-              <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const res = await fetch(
+    `http:localhost:3000/api/product-details/${params.id}`
+  );
+  const data = await res.json();
+  return { props: { data } };
 }

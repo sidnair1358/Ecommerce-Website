@@ -14,12 +14,9 @@ export default function Products({ data: products, params }) {
               variants.edges[0].node.price.amount
             ).toFixed(2);
             return (
-              <Link
-                key={id}
-                href={`/products/product-details/${id.slice(-13)}`}
-              >
+              <Link key={id} href={`/product-details/${id.slice(-13)}`}>
                 <div key={id} className="group relative">
-                  <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 hover:scale-110 transition ease-in-out delay-150">
+                  <div className=" min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 hover:scale-110 transition ease-in-out delay-150">
                     <img
                       src={featuredImage.url}
                       alt="Product image"
@@ -46,7 +43,7 @@ export default function Products({ data: products, params }) {
 
 export async function getServerSideProps(context) {
   const { params } = context;
-  const res = await fetch(`http:localhost:3000/api/${params.products}`);
+  const res = await fetch(`http:localhost:3000/api/products/${params.id}`);
   const data = await res.json();
   return { props: { data } };
 }
