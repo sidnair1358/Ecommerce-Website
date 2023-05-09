@@ -8,6 +8,7 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import Bag from "./Bag";
+import ConfirmationModal from "./ConfirmationModal";
 
 //TODO: Remove hard-coded ids and replace with dynamic data
 const navigation = [
