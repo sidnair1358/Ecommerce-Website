@@ -12,16 +12,12 @@ export default function ProductDetails({ data: products }) {
   const price = `£${products.variants.edges[0].node.price.amount}0`;
   const itemImage = products.images.edges[0].node.url;
   const title = products.title;
-
   const product = {
     id: products.id,
     name: title,
     price: price,
     href: "#",
-    breadcrumbs: [
-      { id: 1, name: "Men", href: "#" },
-      { id: 2, name: "Clothing", href: "#" },
-    ],
+    breadcrumbs: [{ id: 1, name: "Clothing", href: "#" }],
     images: products.images.edges.map((image) => ({
       src: image.node.url,
       alt: "Model wearing plain green basic tee.",

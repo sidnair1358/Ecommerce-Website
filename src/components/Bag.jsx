@@ -12,7 +12,7 @@ export default function Bag({ setViewBag }) {
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-2000"
+        className="relative"
         onClose={() => {
           setOpen;
           setViewBag(false);

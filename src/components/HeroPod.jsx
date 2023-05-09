@@ -7,7 +7,7 @@ const HeroPod = () => {
             <img
               className="h-4/5 sm:h-5/6 w-screen"
               src="/banner.jpg"
-              alt="Shop Logo"
+              alt="Banner Image of woman wearing a hoodie and sunglasses"
             />
           </div>
         </div>
