@@ -94,19 +94,19 @@ export default function Bag({ setViewBag }) {
                                       type="button"
                                       className="font-medium text-slate-700 hover:text-slate-500"
                                       onClick={() =>
-                                        decreaseCartQuantity(product.id)
+                                        decreaseCartQuantity(product)
                                       }
                                     >
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
                                         fill="currentColor"
-                                        class="w-6 h-6"
+                                        className="w-6 h-6"
                                       >
                                         <path
-                                          fill-rule="evenodd"
+                                          fillRule="evenodd"
                                           d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
-                                          clip-rule="evenodd"
+                                          clipRule="evenodd"
                                         />
                                       </svg>
                                     </button>
@@ -122,12 +122,12 @@ export default function Bag({ setViewBag }) {
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
                                         fill="currentColor"
-                                        class="w-6 h-6"
+                                        className="w-6 h-6"
                                       >
                                         <path
-                                          fill-rule="evenodd"
+                                          fillRule="evenodd"
                                           d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
-                                          clip-rule="evenodd"
+                                          clipRule="evenodd"
                                         />
                                       </svg>
                                     </button>
@@ -155,7 +155,7 @@ export default function Bag({ setViewBag }) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>{cartItems[0] && cartItems[0].price}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.

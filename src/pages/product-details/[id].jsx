@@ -13,8 +13,6 @@ export default function ProductDetails({ data: products }) {
   const itemImage = products.images.edges[0].node.url;
   const title = products.title;
 
-  console.log("=== cartItems [id].jsx [16] ===", cartItems);
-
   const product = {
     id: products.id,
     name: title,
@@ -31,21 +29,25 @@ export default function ProductDetails({ data: products }) {
     colors: [
       {
         name: "Green",
-        class: "bg-emerald-800",
+        className: "bg-emerald-800",
         selectedClass: "ring-gray-400",
       },
       {
         name: "Olive",
-        class: "bg-lime-900",
+        className: "bg-lime-900",
         selectedClass: "ring-gray-400",
       },
-      { name: "Ocean", class: "bg-teal-800", selectedClass: "ring-gray-900" },
       {
-        name: "Purple",
-        class: "bg-purple-950",
+        name: "Ocean",
+        className: "bg-teal-800",
         selectedClass: "ring-gray-900",
       },
-      { name: "Red", class: "bg-rose-950", selectedClass: "ring-gray-900" },
+      {
+        name: "Purple",
+        className: "bg-purple-950",
+        selectedClass: "ring-gray-900",
+      },
+      { name: "Red", className: "bg-rose-950", selectedClass: "ring-gray-900" },
     ],
     sizes: [
       { name: "XXS", inStock: false },
@@ -114,7 +116,13 @@ export default function ProductDetails({ data: products }) {
         </nav>
 
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
+          <div
+            className={
+              product.images.length === 1
+                ? "w-full"
+                : "aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block"
+            }
+          >
             <img
               src={product.images[0].src}
               alt={product.images[0].alt}
@@ -123,26 +131,32 @@ export default function ProductDetails({ data: products }) {
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
-                className="h-full w-full object-cover object-center"
-              />
+              {product.images[1] && (
+                <img
+                  src={product.images[1].src}
+                  alt={product.images[1].alt}
+                  className="h-full w-full object-cover object-center"
+                />
+              )}
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
-                className="h-full w-full object-cover object-center"
-              />
+              {product.images[2] && (
+                <img
+                  src={product.images[2].src}
+                  alt={product.images[2].alt}
+                  className="h-full w-full object-cover object-center"
+                />
+              )}
             </div>
           </div>
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
-              className="h-full w-full object-cover object-center"
-            />
+            {product.images[3] && (
+              <img
+                src={product.images[3].src}
+                alt={product.images[3].alt}
+                className="h-full w-full object-cover object-center"
+              />
+            )}
           </div>
         </div>
 
