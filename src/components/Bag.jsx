@@ -8,8 +8,6 @@ export default function Bag({ setViewBag }) {
     shopContext();
   const [open, setOpen] = useState(true);
 
-  console.log("state", cartItems);
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -94,22 +92,44 @@ export default function Bag({ setViewBag }) {
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <button
                                       type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                                      className="font-medium text-slate-700 hover:text-slate-500"
                                       onClick={() =>
                                         decreaseCartQuantity(product.id)
                                       }
                                     >
-                                      -
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        class="w-6 h-6"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
+                                          clip-rule="evenodd"
+                                        />
+                                      </svg>
                                     </button>
                                     <p className="text-gray-500">
                                       Qty {product.quantity}
                                     </p>
                                     <button
                                       type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                                      onClick={() => addToCart(product.id)}
+                                      className="font-medium text-slate-700 hover:text-slate-500"
+                                      onClick={() => addToCart(product)}
                                     >
-                                      +
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        class="w-6 h-6"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+                                          clip-rule="evenodd"
+                                        />
+                                      </svg>
                                     </button>
 
                                     <div className="flex">
