@@ -7,12 +7,12 @@ export function ProvideContext({ children }) {
 
   const setPrice = (changeType, currentItemPrice, productPrice, quantity) => {
     let totalPrice = currentItemPrice.slice(1);
-    const itemPrice = parseFloat(productPrice.slice(1)) / quantity;
+    const itemPrice = parseFloat(currentItemPrice.slice(1)) / quantity;
     if (changeType === "increase")
       totalPrice = parseFloat(totalPrice) + itemPrice;
     if (changeType === "decrease")
       totalPrice = parseFloat(totalPrice) - itemPrice;
-    return `£${totalPrice}`;
+    return `£${totalPrice.toFixed(2)}`;
   };
 
   const addToCart = (product) => {

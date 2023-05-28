@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 
-export const ConfirmationModal = () => {
+export const ConfirmationModal = ({ close, setClose }) => {
+  const closeModal = (e) => {
+    e.preventDefault();
+    setClose(true);
+  };
   return (
     <div
       id="toast-default"
-      className="flex mt-10 items-center w-full max-w-xs p-4 text-gray-800 bg-stone-100 rounded-lg shadow dark:text-gray-400"
+      className={
+        close
+          ? "hidden"
+          : "flex mt-10 items-center w-full max-w-xs p-4 text-gray-800 bg-stone-100 rounded-lg shadow dark:text-gray-400"
+      }
       role="alert"
     >
       <div className="ml-3 text-lg text-center pl-14 font-normal">
@@ -23,6 +31,7 @@ export const ConfirmationModal = () => {
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={(e) => closeModal(e)}
         >
           <path
             fill-rule="evenodd"

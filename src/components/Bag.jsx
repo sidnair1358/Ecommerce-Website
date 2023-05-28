@@ -8,6 +8,14 @@ export default function Bag({ setViewBag }) {
     shopContext();
   const [open, setOpen] = useState(true);
 
+  let bagItemPrice = [];
+
+  cartItems.forEach((item) =>
+    bagItemPrice.push(Number(parseInt(item.price.replace(/\D/g, "")) / 100))
+  );
+
+  const bagTotal = bagItemPrice.reduce((sum, item) => sum + item, 0).toFixed(2);
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -116,7 +124,9 @@ export default function Bag({ setViewBag }) {
                                     <button
                                       type="button"
                                       className="font-medium text-slate-700 hover:text-slate-500"
-                                      onClick={() => addToCart(product)}
+                                      onClick={() => {
+                                        addToCart(product);
+                                      }}
                                     >
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +165,7 @@ export default function Bag({ setViewBag }) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>{cartItems[0] && cartItems[0].price}</p>
+                        <p>{cartItems[0] && `£${bagTotal}`}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
@@ -168,18 +178,16 @@ export default function Bag({ setViewBag }) {
                           Checkout
                         </a>
                       </div>
-                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                        <p>
-                          or
-                          <button
-                            type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            Continue Shopping
-                            <span aria-hidden="true"> &rarr;</span>
-                          </button>
-                        </p>
+                      <div className="mt-6 flex justify-center text-center space-x-2 text-sm text-gray-500">
+                        <p>or</p>
+                        <button
+                          type="button"
+                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                          onClick={() => setOpen(false)}
+                        >
+                          Continue Shopping
+                          <span aria-hidden="true"> &rarr;</span>
+                        </button>
                       </div>
                     </div>
                   </div>

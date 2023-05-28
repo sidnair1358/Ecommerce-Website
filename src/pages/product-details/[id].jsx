@@ -11,11 +11,11 @@ function classNames(...classes) {
 export default function ProductDetails({ data: products }) {
   const { addToCart, cartItems } = shopContext();
   const [displayModal, setDisplayModal] = useState(false);
+  const [close, setClose] = useState(false);
 
   const price = `£${products.variants.edges[0].node.price.amount}0`;
   const itemImage = products.images.edges[0].node.url;
   const title = products.title;
-
   const product = {
     id: products.id,
     name: title,
@@ -26,28 +26,28 @@ export default function ProductDetails({ data: products }) {
       src: image.node.url,
       alt: "Model wearing plain green basic tee.",
     })),
-    colors: [
+    colours: [
       {
         name: "Green",
-        className: "bg-emerald-800",
+        class: "bg-emerald-800",
         selectedClass: "ring-gray-400",
       },
       {
         name: "Olive",
-        className: "bg-lime-900",
+        class: "bg-lime-900",
         selectedClass: "ring-gray-400",
       },
       {
         name: "Ocean",
-        className: "bg-teal-800",
+        class: "bg-teal-800",
         selectedClass: "ring-gray-900",
       },
       {
         name: "Purple",
-        className: "bg-purple-950",
+        class: "bg-purple-950",
         selectedClass: "ring-gray-900",
       },
-      { name: "Red", className: "bg-rose-950", selectedClass: "ring-gray-900" },
+      { name: "Red", class: "bg-rose-950", selectedClass: "ring-gray-900" },
     ],
     sizes: [
       { name: "XXS", inStock: false },
@@ -62,14 +62,14 @@ export default function ProductDetails({ data: products }) {
     description: products.description,
     highlights: [
       "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
+      "Dyed with our proprietary colours",
       "Pre-washed & pre-shrunk",
       "Ultra-soft 100% cotton",
     ],
   };
   const reviews = { href: "#", average: 4, totalCount: 117 };
 
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedcolour, setSelectedcolour] = useState(product.colours[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
   return (
@@ -94,7 +94,7 @@ export default function ProductDetails({ data: products }) {
                     width={16}
                     height={20}
                     viewBox="0 0 16 20"
-                    fill="currentColor"
+                    fill="currentcolour"
                     aria-hidden="true"
                     className="h-5 w-4 text-gray-300"
                   >
@@ -202,21 +202,21 @@ export default function ProductDetails({ data: products }) {
                 <h3 className="text-sm font-medium text-gray-900">Colour</h3>
 
                 <RadioGroup
-                  value={selectedColor}
-                  onChange={setSelectedColor}
+                  value={selectedcolour}
+                  onChange={setSelectedcolour}
                   className="mt-4"
                 >
                   <RadioGroup.Label className="sr-only">
-                    Choose a color
+                    Choose a colour
                   </RadioGroup.Label>
                   <div className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
+                    {product.colours.map((colour) => (
                       <RadioGroup.Option
-                        key={color.name}
-                        value={color}
+                        key={colour.name}
+                        value={colour}
                         className={({ active, checked }) =>
                           classNames(
-                            color.selectedClass,
+                            colour.selectedClass,
                             active && checked ? "ring ring-offset-1" : "",
                             !active && checked ? "ring-2" : "",
                             "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
@@ -224,12 +224,12 @@ export default function ProductDetails({ data: products }) {
                         }
                       >
                         <RadioGroup.Label as="span" className="sr-only">
-                          {color.name}
+                          {colour.name}
                         </RadioGroup.Label>
                         <span
                           aria-hidden="true"
                           className={classNames(
-                            color.class,
+                            colour.class,
                             "h-8 w-8 rounded-full border border-black border-opacity-10"
                           )}
                         />
@@ -298,7 +298,7 @@ export default function ProductDetails({ data: products }) {
                                   className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
                                   viewBox="0 0 100 100"
                                   preserveAspectRatio="none"
-                                  stroke="currentColor"
+                                  stroke="currentColour"
                                 >
                                   <line
                                     x1={0}
@@ -322,13 +322,16 @@ export default function ProductDetails({ data: products }) {
                 onClick={() => {
                   setDisplayModal(true);
                   addToCart(product);
+                  setClose(false);
                 }}
                 type="button"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Add to cart
               </button>
-              {displayModal && <ConfirmationModal />}
+              {displayModal && (
+                <ConfirmationModal close={close} setClose={setClose} />
+              )}
             </form>
           </div>
 
