@@ -10,6 +10,8 @@ A modal should pop up to display the addition of an item to the shopping bag. On
 
 There is an increment and decrement button which does what the name suggests.
 
+To start: npm run dev
+
 ## Tools used:
 
     - Next
