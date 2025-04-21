@@ -1,6 +1,6 @@
 ## Ecommerce Website
 
-I have created a simple ecommerce website using the mock api. The website displays a list of categories on the landing page below the fold and has links to selected categories in the navbar. You can click through to a specific category and reach a products page per category.
+I have created a simple ecommerce website using a mock api. The website displays a list of categories on the landing page below the fold and has links to selected categories in the navbar. You can click through to a specific category and reach a products page per category.
 
 Within the products page you can select a product by clicking on it and this should take you to the product details page.
 
