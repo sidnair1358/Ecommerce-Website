@@ -17,3 +17,11 @@ To start: npm run dev
     - Next
     - Tailwind
     - React-HeroIcons
+
+<img width="741" alt="image" src="https://github.com/user-attachments/assets/a9021701-4d31-4bd5-9083-5377a77dc448" />
+<img width="748" alt="image" src="https://github.com/user-attachments/assets/8c63675f-c7ad-4df1-9acc-803fccf910a1" />
+<img width="744" alt="image" src="https://github.com/user-attachments/assets/8f6a3e45-2a42-41c7-9e1c-7c0e1fa9ad38" />
+<img width="879" alt="image" src="https://github.com/user-attachments/assets/69a093b9-c190-4993-9048-53015a2da456" />
+
+
+
